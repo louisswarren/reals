@@ -17,4 +17,5 @@ csuc n = suc n , s≤s z≤n
 _*ℕ⁺_ : ℕ⁺ → ℕ⁺ → ℕ⁺
 (zero , ()) *ℕ⁺ (m , pfm)
 (suc zero , pfn) *ℕ⁺ (m , pfm) = m , pfm
-(suc (suc n) , pfn) *ℕ⁺ (m , pfm) = (m + suc n * m) , {!   !}
+(suc n@(suc _) , pfn) *ℕ⁺ (zero , ())
+(suc n@(suc _) , pfn) *ℕ⁺ (m@(suc _) , pfm) = (m + n * m) , s≤s z≤n

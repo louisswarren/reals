@@ -14,11 +14,17 @@ open import common
 
 ℤ = ℕ × ℕ
 
-pos : ℕ → ℤ
-pos n = (n , zero)
+wpos : ℕ → ℤ
+wpos n = (n , zero)
 
-neg : ℕ → ℤ
-neg n = (zero , n)
+wneg : ℕ → ℤ
+wneg n = (zero , n)
+
+pos : ℕ⁺ → ℤ
+pos (n , _) = wpos n
+
+neg : ℕ⁺ → ℤ
+neg (n , _) = wneg n
 
 infixl 4 _≤_
 infixl 6 _+_ _-_
