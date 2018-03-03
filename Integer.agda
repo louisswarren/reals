@@ -10,24 +10,34 @@ open import Agda.Builtin.Nat
 open import Natural
   renaming ( _≤_ to _≤ℕ_)
 
-open import common
+open import Agda.Builtin.Int renaming (Int to ℤ)
 
-data ℤ : Set where
-  pos : ℕ → ℤ
-  negsuc : ℕ → ℤ
+open import common
 
 infixl 4 _≤_
 infixl 6 _+_ _-_
 infixl 7 _*_
 
 _≤_ : ℤ → ℤ → Set
-a ≤ b = {!   !}
+pos n    ≤ pos m    = n ≤ℕ m
+pos _    ≤ negsuc _ = False
+negsuc _ ≤ pos _    = True
+negsuc n ≤ negsuc m = m ≤ℕ n
 
 _+_ : ℤ → ℤ → ℤ
-a + b = ?
+pos n          + pos m          = pos (n +ℕ m)
+pos zero       + negsuc m       = negsuc m
+pos (suc n)    + negsuc zero    = pos n
+pos (suc n)    + negsuc (suc m) = pos n + negsuc m
+negsuc n       + pos zero       = negsuc n
+negsuc zero    + pos (suc m)    = pos m
+negsuc (suc n) + pos (suc m)    = negsuc n + pos m
+negsuc n       + negsuc m       = negsuc (suc (n +ℕ m))
 
 _-_ : ℤ → ℤ → ℤ
-a - b = ?
+a - pos zero = a
+a - pos (suc n) = a + negsuc n
+a - negsuc n = a + pos (suc n)
 
 _*_ : ℤ → ℤ → ℤ
 a * b = ?

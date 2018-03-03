@@ -14,3 +14,6 @@ infixr 10 _,_
 
 _×_ : (A B : Set) → Set
 A × B = Σ A (λ _ → B)
+
+record True : Set where
+data False : Set where
